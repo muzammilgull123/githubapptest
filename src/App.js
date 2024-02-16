@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from './Home'
+import ModalWithButton from "./ModalWithButton";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/"  element={<Home/>} />
+      <Route path="/thankyou/:oauthToken/:userName/:userid" element={<ModalWithButton/>} />
+
+    </Routes>
   );
 }
+//getid
 
 export default App;
+
+
+// import logo from './logo.svg';
+// import './App.css';
+
+// function App() {
+//   const redirectToGithubLogin = () => {
+    
+//     window.location.href = 'http://localhost:3000/login/github'; 
+//   };
+
+//   return (
+//     <div className='min-h-screen'>
+//   <div className=' bg-blue-600 h-10 '>
+//     <div class="relative h-32 w-32 ... ">
+//   <div class="absolute inset-x-0 top-0  mt-2 ml-2	font-weight: 900 "><h1>Git Oath App</h1></div>
+ 
+// </div>
+   
+//     </div>
+//     <div className='h-screen flex items-center justify-center' > 
+//     <button className=' bg-blue-600 h-10 py-2 px-4 rounded-md' onClick={redirectToGithubLogin} >
+//         Log In Github OAth APP
+//     </button>
+//       </div>
+//     </div>
+  
+ 
+//   );
+// }
+
+// export default App;
