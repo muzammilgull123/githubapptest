@@ -19,3 +19,5 @@
 // }
 
 ok done sub kuch ab koi kam nhaiii rhet 
+hum sub ready hain 
+ready han q kae push nahi horhaa 
