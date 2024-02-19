@@ -23,10 +23,4 @@ hum sub ready hain
 ready han q kae push nahi horhaa 
 
 nfqlJFOL2N  POEEEEEEEEEQCSqM mc z
-feqlnvw;lknmlfem;BlobEvent  lvdqb jvwmvdqq
-
-qlkeqnvlkma
-b BiquadFilterNodeb
-
-
-;fvnkeqfmeqnkeqnlefqmfeq
+feqlnvw;lknmlfem;BlobEvent  lvdqb jvwmvd
