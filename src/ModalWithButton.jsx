@@ -2,39 +2,49 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-
 const ModalWithButton = ({ onSuccess }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [repoName, setRepoName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [chanelId, setChanelId] = useState('');
   const [repoOwnerName, setRepoOwnerName] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
-  const {oauthToken}=useParams();
-  console.log(oauthToken)
+  const { oauthToken, userid } = useParams();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true); // Set submitted to true to trigger the effect
+    setSubmitted(true);
   };
 
   useEffect(() => {
     if (submitted) {
       const sendRequest = async () => {
+        console.log("aouthToken",oauthToken);
+        console.log("userId",userid)
+
         try {
-          const response = await axios.post('http://localhost:3000/webhookdetail', {
+          const response = await axios.post('http://localhost:3000/webhookdetail',{
             token: oauthToken,
+            userId: userid,
             repoName: repoName,
             repoOwner: repoOwnerName,
+            userName: userName,
+            chanelId: chanelId
           });
-          console.log("response",response)
+          console.log("response", response);
           if (response.status === 200) {
             console.log("Repository Name:", repoName);
             console.log("Repository Owner Name:", repoOwnerName);
+          
             setRepoName('');
             setRepoOwnerName('');
-            setIsOpen(false)
-             onSuccess(); // Call the onSuccess callback passed from the parent component
+            setUserName('');
+            setChanelId('');
+            setIsOpen(false);
+            onSuccess();
           } else {
             throw new Error('Failed to submit data');
           }
@@ -43,9 +53,9 @@ const ModalWithButton = ({ onSuccess }) => {
         }
       };
       sendRequest();
-      setSubmitted(false); // Reset submitted state after sending the request
+      setSubmitted(false);
     }
-  }, [submitted, onSuccess, repoName, repoOwnerName,oauthToken, closeModal]);
+  }, [submitted, onSuccess, repoName, repoOwnerName, userName, chanelId, oauthToken, userid]);
 
   return (
     <div>
@@ -64,6 +74,14 @@ const ModalWithButton = ({ onSuccess }) => {
                 <div className="mb-6">
                   <label htmlFor="repoOwnerName" className="block text-gray-700 text-sm font-bold mb-2">Repository Owner Name:</label>
                   <input type="text" id="repoOwnerName" name="repoOwnerName" value={repoOwnerName} onChange={(e) => setRepoOwnerName(e.target.value)} className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="setUserName" className="block text-gray-700 text-sm font-bold mb-2">User Name:</label>
+                  <input type="text" id="setUserName" name="setUserName" value={userName} onChange={(e) => setUserName(e.target.value)} className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+                <div className="mb-6">
+                  <label htmlFor="setChanelId" className="block text-gray-700 text-sm font-bold mb-2"> Add Slack Chanel:</label>
+                  <input type="text" id="setChanelId" name="setChanelId" value={chanelId} onChange={(e) => setChanelId(e.target.value)} className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
                 <div className="flex justify-between">
                   <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>

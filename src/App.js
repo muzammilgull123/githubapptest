@@ -1,19 +1,23 @@
-// App.js
-import React from "react";
+
+import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from './Home'
-import ModalWithButton from "./ModalWithButton";
+// import Home from './Home'
+// import ModalWithButton from "./ModalWithButton";
+const Home = lazy(()=>import ('./Home'))
+const ModalWithButton = lazy(()=>import('./ModalWithButton'))
+// const SlackChaneld = lazy(()=>import('./slackInfo'))
 
 function App() {
   return (
     <Routes>
       <Route path="/"  element={<Home/>} />
       <Route path="/thankyou/:oauthToken/:userName/:userid" element={<ModalWithButton/>} />
+   
 
     </Routes>
   );
 }
-//getid
+
 
 export default App;
 
