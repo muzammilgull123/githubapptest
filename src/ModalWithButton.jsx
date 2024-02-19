@@ -38,7 +38,6 @@ const ModalWithButton = ({ onSuccess }) => {
           if (response.status === 200) {
             console.log("Repository Name:", repoName);
             console.log("Repository Owner Name:", repoOwnerName);
-          
             setRepoName('');
             setRepoOwnerName('');
             setUserName('');
