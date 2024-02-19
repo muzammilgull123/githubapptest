@@ -22,5 +22,4 @@ ok done sub kuch ab koi kam nhaiii rhet
 hum sub ready hain 
 ready han q kae push nahi horhaa 
 
-nfqlJFOL2N  POEEEEEEEEEQCSqM mc z
-feqlnvw;lknmlfem;BlobEvent  lvdqb jvwmvd
+nfqlJFOL2N  POEEEEEEEEEQCS
