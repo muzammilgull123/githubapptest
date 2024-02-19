@@ -22,11 +22,11 @@ const ModalWithButton = ({ onSuccess }) => {
   useEffect(() => {
     if (submitted) {
       const sendRequest = async () => {
-        console.log("aouthToken",oauthToken);
-        console.log("userId",userid)
+        console.log("aouthToken", oauthToken);
+        console.log("userId", userid)
 
         try {
-          const response = await axios.post('http://localhost:3000/webhookdetail',{
+          const response = await axios.post('http://localhost:3000/webhookdetail', {
             token: oauthToken,
             userId: userid,
             repoName: repoName,
