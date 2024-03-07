@@ -11,16 +11,7 @@ function App() {
     <Routes>
       <Route path="/"  element={<Home/>} />
       <Route path="/thankyou/:oauthToken/:userName/:userid" element={<ModalWithButton/>} />
-    {/* kam q nahi horrhas  */}
-    {/* fdnknfefwn
-    qfefmklwnf */}
-    {/* fenqkanfksfng,ngfr, */}
-    {/* access_token */}
-    {/* ;mvdkwnfkf */}
-    {/* sndjqbefjbf */}
-{/* wrnfljrwbfjbrw */}
-
-{/* lnekjffwnknkn */}
+  
  
     </Routes>
   );
