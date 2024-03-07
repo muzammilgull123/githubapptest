@@ -16,9 +16,7 @@ function App() {
    {/* slack token undefinde arrha hain  */}
    {/* slack checking  */}
  {/* keflwmfel,wnkrwnkwnflewm */}
- {/* lfeqnjrwghjwvfjeqkfnf */}
- {/* lrwgkrwnjrwnjgrb */}
- {/* knfkjwrjbg */}
+ 
     </Routes>
   );
 }
