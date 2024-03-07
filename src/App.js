@@ -12,7 +12,7 @@ function App() {
     <Routes>
       <Route path="/"  element={<Home/>} />
       <Route path="/thankyou/:oauthToken/:userName/:userid" element={<ModalWithButton/>} />
-   
+      
 
     </Routes>
   );

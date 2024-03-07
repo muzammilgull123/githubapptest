@@ -9,8 +9,7 @@ function Home() {
       <div className=' bg-blue-600 h-10 '>
         <div className="relative h-32 w-32 ... ">
           <div className="absolute inset-x-0 top-0  mt-2 ml-2	font-weight: 900 "><h1>Git Oath App</h1></div>
-
-        </div>
+          </div>
 
       </div>
       <div className='h-screen flex items-center justify-center' >

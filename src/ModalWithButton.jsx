@@ -18,7 +18,10 @@ const ModalWithButton = ({ onSuccess }) => {
     event.preventDefault();
     setSubmitted(true);
   };
-
+  const handleSlackLogin = (userid) => {
+    window.location.href = `http://localhost:3000/login/slack`;
+  }
+  
   useEffect(() => {
     if (submitted) {
       const sendRequest = async () => {
@@ -38,11 +41,12 @@ const ModalWithButton = ({ onSuccess }) => {
           if (response.status === 200) {
             console.log("Repository Name:", repoName);
             console.log("Repository Owner Name:", repoOwnerName);
+            setIsOpen(false);
             setRepoName('');
             setRepoOwnerName('');
             setUserName('');
             setChanelId('');
-            setIsOpen(false);
+      
             onSuccess();
           } else {
             throw new Error('Failed to submit data');
@@ -58,6 +62,9 @@ const ModalWithButton = ({ onSuccess }) => {
 
   return (
     <div>
+       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSlackLogin} > 
+        login with slack
+        </button>
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={openModal}>Open Modal</button>
       {isOpen && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -91,6 +98,7 @@ const ModalWithButton = ({ onSuccess }) => {
           </div>
         </div>
       )}
+     
     </div>
   );
 };
