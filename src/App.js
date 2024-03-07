@@ -1,4 +1,3 @@
-
 import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 // import Home from './Home'
@@ -15,7 +14,7 @@ function App() {
     {/* kam q nahi horrhas  */}
     {/* chal bae cal */}
     {/* ARAM KR BHA */}
-      
+      {/* ok han check kr laye  */}
 
     </Routes>
   );
