@@ -13,7 +13,7 @@ function App() {
       <Route path="/thankyou/:oauthToken/:userName/:userid" element={<ModalWithButton/>} />
     {/* kam q nahi horrhas  */}
    {/* done challaa ga ab  */}
-   
+   {/* slack token undefinde arrha hain  */}
     </Routes>
   );
 }
