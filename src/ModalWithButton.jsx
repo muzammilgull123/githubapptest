@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ModalWithButton = ({ onSuccess }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,25 +13,36 @@ const ModalWithButton = ({ onSuccess }) => {
   const [submitted, setSubmitted] = useState(false);
 
   const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false);
+    resetForm();
+  };
   const { oauthToken, userid } = useParams();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // Validate if all fields are filled
+    if (!repoName || !repoOwnerName || !userName || !chanelId) {
+      alert('All fields are required');
+      return;
+    }
+
     setSubmitted(true);
   };
-  const handleSlackLogin = (userid) => {
-    window.location.href = `http://localhost:3000/login/slack`;
-  }
-  
+
+  const resetForm = () => {
+    setRepoName('');
+    setRepoOwnerName('');
+    setUserName('');
+    setChanelId('');
+  };
+
   useEffect(() => {
     if (submitted) {
       const sendRequest = async () => {
-        console.log("aouthToken", oauthToken);
-        console.log("userId", userid)
-
         try {
-          const response = await axios.post('http://localhost:3000/webhookdetail', {
+          const response = await axios.post('http://localhost:3000/github/webhookdetail', {
             token: oauthToken,
             userId: userid,
             repoName: repoName,
@@ -37,22 +50,17 @@ const ModalWithButton = ({ onSuccess }) => {
             userName: userName,
             chanelId: chanelId
           });
-          console.log("response", response);
+
           if (response.status === 200) {
-            console.log("Repository Name:", repoName);
-            console.log("Repository Owner Name:", repoOwnerName);
-            setIsOpen(false);
-            setRepoName('');
-            setRepoOwnerName('');
-            setUserName('');
-            setChanelId('');
-      
             onSuccess();
+          
           } else {
             throw new Error('Failed to submit data');
           }
         } catch (error) {
           console.error('Error:', error.message);
+          toast.error('Internal Server Error');
+          closeModal();
         }
       };
       sendRequest();
@@ -61,11 +69,12 @@ const ModalWithButton = ({ onSuccess }) => {
   }, [submitted, onSuccess, repoName, repoOwnerName, userName, chanelId, oauthToken, userid]);
 
   return (
-    <div>
-       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSlackLogin} > 
-        login with slack
-        </button>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={openModal}>Open Modal</button>
+
+    <div className='flex flex-col items-center justify-center h-full' >
+    <div className="w-full h-10 text-white font-bold bg-blue-500 py-2 px-4">
+      REGISTER YOURE WEBHOOK 
+    </div>
+      {/* <button className=" mt-80 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded align-middle" onClick={openModal}>Register Webhook</button> */}
       {isOpen && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen">
@@ -85,20 +94,17 @@ const ModalWithButton = ({ onSuccess }) => {
                   <label htmlFor="setUserName" className="block text-gray-700 text-sm font-bold mb-2">User Name:</label>
                   <input type="text" id="setUserName" name="setUserName" value={userName} onChange={(e) => setUserName(e.target.value)} className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
-                <div className="mb-6">
-                  <label htmlFor="setChanelId" className="block text-gray-700 text-sm font-bold mb-2"> Add Slack Chanel:</label>
-                  <input type="text" id="setChanelId" name="setChanelId" value={chanelId} onChange={(e) => setChanelId(e.target.value)} className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                </div>
                 <div className="flex justify-between">
                   <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
-                  <button type="button" onClick={closeModal} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Cancel</button>
+                  {/* <button type="button" onClick={closeModal} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Cancel</button> */}
                 </div>
               </form>
             </div>
           </div>
         </div>
+  
       )}
-     
+      <ToastContainer />
     </div>
   );
 };

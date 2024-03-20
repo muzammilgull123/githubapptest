@@ -1,54 +1,33 @@
-import React, { lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-// import Home from './Home'
-// import ModalWithButton from "./ModalWithButton";
-const Home = lazy(()=>import ('./Home'))
-const ModalWithButton = lazy(()=>import('./ModalWithButton'))
-// const SlackChaneld = lazy(()=>import('./slackInfo'))
+
+const Home = lazy(() => import('./Home'));
+const ModalWithButton = lazy(() => import('./ModalWithButton'));
+const SlackLoginButton = lazy(() => import('./slack'));
+const RegisterRepoDetail = lazy(() => import('./registerRepo'));
+const LogInUser = lazy(() => import('./login'));
+const RegisterUser = lazy(() => import('./register'));
+const GitHubLogin = lazy(() => import('./gihtublogin'));
+const SlackLogin = lazy(() => import('./slackLogin'));
+const SlackAccountTable = lazy(() => import('./slackAccount'));
 
 function App() {
   return (
-    <Routes>
-      <Route path="/"  element={<Home/>} />
-      <Route path="/thankyou/:oauthToken/:userName/:userid" element={<ModalWithButton/>} />
-  
- 
-    </Routes>
+    <Suspense fallback="<h1>Loading.....</h1>">
+      <Routes>
+        <Route path="/" element={<LogInUser />} />
+        <Route path="/signuppage" element={<RegisterUser />} />
+        <Route path="/home/:id/:token" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/home/:id/:access_token" element={<Home />} />
+        <Route path="/slacklogin/:access_token/:team/:app_id" element={<SlackLogin />} />
+        <Route path="/slackaccount" element={<SlackAccountTable />} />
+        <Route path="/thankyou/:id" element={<ModalWithButton />} />
+        <Route path="/slack/:id" element={<SlackLoginButton />} />
+        <Route path="/githublogin/:oauthToken/:user_name/:git_account_id" element={<GitHubLogin />} />
+      </Routes>
+    </Suspense>
   );
 }
 
-
-
 export default App;
-
-
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   const redirectToGithubLogin = () => {
-    
-//     window.location.href = 'http://localhost:3000/login/github'; 
-//   };
-
-//   return (
-//     <div className='min-h-screen'>
-//   <div className=' bg-blue-600 h-10 '>
-//     <div class="relative h-32 w-32 ... ">
-//   <div class="absolute inset-x-0 top-0  mt-2 ml-2	font-weight: 900 "><h1>Git Oath App</h1></div>
- 
-// </div>
-   
-//     </div>
-//     <div className='h-screen flex items-center justify-center' > 
-//     <button className=' bg-blue-600 h-10 py-2 px-4 rounded-md' onClick={redirectToGithubLogin} >
-//         Log In Github OAth APP
-//     </button>
-//       </div>
-//     </div>
-  
- 
-//   );
-// }
-
-// export default App;
